@@ -36,7 +36,7 @@ app.get('/api/events', (req, res) => {
 // Create a simple email collection route
 app.post('/api/email', (req, res) => {
   const { email } = req.body;
-  // Here you could save the email to a database if needed
+ 
   console.log('Email collected:', email);
   res.json({ success: true });
 });
