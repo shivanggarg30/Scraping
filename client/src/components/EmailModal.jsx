@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './EmailModal.css';
+import { API_BASE_URL } from '../config';
 
 function EmailModal({ eventUrl, onClose }) {
   const [email, setEmail] = useState('');
@@ -11,8 +12,6 @@ function EmailModal({ eventUrl, onClose }) {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
-
-  const API_BASE_URL = 'http://localhost:5000/api';
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
