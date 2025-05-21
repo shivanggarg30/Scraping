@@ -4,7 +4,7 @@
 const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || // Netlify, Vite, etc.
   (import.meta.env.MODE === 'production'
-    ? 'https://scraping-gamma.vercel.app/' // Your deployed backend on Vercel
+    ? 'https://scraping-gamma.vercel.app/api' // Your deployed backend on Vercel
     : 'http://localhost:5000/api');            // Local dev fallback
 
 // Debug logging (optional)
