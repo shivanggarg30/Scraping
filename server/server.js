@@ -8,11 +8,15 @@ require('dotenv').config();
 const app = express();
 
 // ✅ CORS setup for Netlify frontend
+
+
+// Allow only Vite frontend (localhost:5173)
 app.use(cors({
-  origin: 'https://scrapingevents.netlify.app', // your frontend domain
+  origin: 'http://localhost:5173',
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 
 app.use(express.json());
 
@@ -55,7 +59,7 @@ app.post('/api/email', (req, res) => {
 });
 
 // Start server (No default port, only process.env.PORT)
-const PORT = process.env.PORT;
+const PORT = process.env.PORT||5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

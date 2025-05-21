@@ -1,14 +1,21 @@
 // src/config.js
+const config = {
+  // For local development
+  development: {
+    API_BASE_URL: 'http://localhost:5000/api'
+  },
+  // For production deployment
+  production: {
+    API_BASE_URL: 'https://scraping-6p4v.onrender.com/api'
+  }
+};
 
-// First, try to use environment variable
-const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL || // Netlify, Vite, etc.
-  (import.meta.env.MODE === 'production'
-    ? 'https://scraping-gamma.vercel.app/api' // Your deployed backend on Vercel
-    : 'http://localhost:5000/api');            // Local dev fallback
+// Determine which environment to use - Vite uses import.meta.env instead of process.env
+const environment = import.meta.env.MODE === 'production' ? 'production' : 'development';
 
-// Debug logging (optional)
-console.log('Environment Mode:', import.meta.env.MODE);
-console.log('Using API Base URL:', API_BASE_URL);
+// Add this for debugging
+console.log('Current environment:', environment);
+console.log('Using API URL:', config[environment].API_BASE_URL);
 
-export { API_BASE_URL };
+// Export the appropriate configuration
+export const API_BASE_URL = config[environment].API_BASE_URL;
