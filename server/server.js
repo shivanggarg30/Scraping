@@ -8,7 +8,14 @@ require('dotenv').config();
 // Middleware
 app.use(cors());
 app.use(express.json());
-
+app.get('/',(req,res)=>{
+  res.send({
+    activeStatus:true,
+    error:false,
+  })
+}
+    
+)
 // Import routes
 const otpRoutes = require('./routes/otp');
 
