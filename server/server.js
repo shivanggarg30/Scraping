@@ -1,27 +1,36 @@
+// server.js
+
 const express = require('express');
 const cors = require('cors');
 const cron = require('node-cron');
 const { scrapeEvents } = require('./scraper/eventbrite');
 
-const app = express();
 require('dotenv').config();
-// Middleware
-app.use(cors());
+
+const app = express();
+
+// ✅ CORS setup for Netlify frontend
+app.use(cors({
+  origin: 'https://scrapingevents.netlify.app', // your frontend domain
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
 app.use(express.json());
-app.get('/',(req,res)=>{
+
+// Health check
+app.get('/', (req, res) => {
   res.send({
-    activeStatus:true,
-    error:false,
-  })
-}
-    
-)
+    activeStatus: true,
+    error: false,
+  });
+});
+
 // Import routes
 const otpRoutes = require('./routes/otp');
-
-// Use routes
 app.use('/api', otpRoutes);
 
+// Cached events
 let cachedEvents = [];
 
 // Initial scrape on server start
@@ -35,15 +44,14 @@ cron.schedule('0 */6 * * *', async () => {
   cachedEvents = await scrapeEvents();
 });
 
-// GET /api/events → Return scraped events
+// API: Get events
 app.get('/api/events', (req, res) => {
   res.json(cachedEvents);
 });
 
-// Create a simple email collection route
+// API: Email collection
 app.post('/api/email', (req, res) => {
   const { email } = req.body;
- 
   console.log('Email collected:', email);
   res.json({ success: true });
 });
