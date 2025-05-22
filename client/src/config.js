@@ -3,7 +3,7 @@ const config = {
     API_BASE_URL: 'http://localhost:5000/api'
   },
   production: {
-    API_BASE_URL: 'https://your-render-app-name.onrender.com/api' // Replace with your actual Render backend URL
+    API_BASE_URL: 'https://scraping-6p4v.onrender.com' // Replace with your actual Render backend URL
   }
 };
 
