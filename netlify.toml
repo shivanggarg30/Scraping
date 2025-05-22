@@ -1,15 +1,13 @@
 # netlify.toml
-[build]
-# The directory to deploy
-publish = "build"
-# Build command for your site
-command = "npm run build"
 
-# Environment variables that will be applied at build time
+[build]
+base = "client"                    # Set this if your frontend is in /client
+publish = "client/dist"           # Vite outputs to dist by default
+command = "npm run build"         # This will run "vite build" inside /client
+
 [build.environment]
 NODE_ENV = "production"
 
-# Handle SPA routing - redirect all requests to index.html
 [[redirects]]
 from = "/*"
 to = "/index.html"
