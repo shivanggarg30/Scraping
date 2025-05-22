@@ -14,7 +14,7 @@ function App() {
 
   // Fetch events from backend using API_BASE_URL from config
   useEffect(() => {
-    fetch(`${API_BASE_URL}/events`)
+   fetch(`${API_BASE_URL}/events`) 
       .then(res => res.json())
       .then(data => setEvents(data))
       .catch(err => console.error('Error fetching events:', err));
