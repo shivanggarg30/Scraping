@@ -2,9 +2,10 @@ const config = {
   development: {
     API_BASE_URL: 'http://localhost:5000/api'
   },
-  production: {
-    API_BASE_URL: 'https://scraping-6p4v.onrender.com' // Replace with your actual Render backend URL
-  }
+production: {
+  API_BASE_URL: 'https://scraping-6p4v.onrender.com/api' // ✅ include `/api`
+}
+
 };
 
 const environment = import.meta.env.MODE === 'production' ? 'production' : 'development';
