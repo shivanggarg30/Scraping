@@ -10,7 +10,7 @@ const app = express();
 // ✅ CORS setup for Netlify frontend
 const allowedOrigins = [
   'http://localhost:5173', // Dev frontend
-  'https://scrapingevents.netlify.app/' // Replace with your actual Netlify frontend URL
+  'https://scrapingevents.netlify.app' // Replace with your actual Netlify frontend URL
 ];
 
 app.use(cors({
