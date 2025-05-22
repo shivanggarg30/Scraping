@@ -5,15 +5,16 @@ import EventCard from './components/EventCard';
 import EmailModal from './components/EmailModal';
 import Navbar from './components/Navbar';
 import { useLocation } from 'react-router-dom';
+import { API_BASE_URL } from './config';
 
 function App() {
   const [events, setEvents] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedEventUrl, setSelectedEventUrl] = useState('');
 
-  // Fetch events from backend
+  // Fetch events from backend using API_BASE_URL from config
   useEffect(() => {
-    fetch('http://localhost:5000/api/events')
+    fetch(`${API_BASE_URL}/events`)
       .then(res => res.json())
       .then(data => setEvents(data))
       .catch(err => console.error('Error fetching events:', err));
@@ -39,46 +40,39 @@ function App() {
 
       <div className="App">
         <Routes>
-        <Route path="/" element={
-  <>
-    <h1 className="title">-- Australian Events --</h1>
-    <div className="event-list">
-      {events.length === 0 ? (
-        <p>Loading events...</p>
-      ) : (
-        events.map((event, index) => (
-          <EventCard
-            key={index}
-            title={event.title}
-            url={event.link}
-            onGetTickets={() => handleGetTickets(event.link)}
-          />
-        ))
-      )}
-    </div>
-    {showModal && (
-      <EmailModal
-        eventUrl={selectedEventUrl}
-        onClose={closeModal}
-      />
-    )}
-  </>
-} />
-<Route path="/redirect" element={<RedirectPage />} />
-
-
+          <Route path="/" element={
+            <>
+              <h1 className="title">-- Australian Events --</h1>
+              <div className="event-list">
+                {events.length === 0 ? (
+                  <p>Loading events...</p>
+                ) : (
+                  events.map((event, index) => (
+                    <EventCard
+                      key={index}
+                      title={event.title}
+                      url={event.link}
+                      onGetTickets={() => handleGetTickets(event.link)}
+                    />
+                  ))
+                )}
+              </div>
+              {showModal && (
+                <EmailModal
+                  eventUrl={selectedEventUrl}
+                  onClose={closeModal}
+                />
+              )}
+            </>
+          } />
+          <Route path="/redirect" element={<RedirectPage />} />
           {/* Example route: could be used in future for internal event detail pages */}
           <Route path="/event/:id" element={<EventDetail />} />
         </Routes>
-
-        {showModal && (
-          <EmailModal eventUrl={selectedEventUrl} onClose={closeModal} />
-        )}
       </div>
     </Router>
   );
 }
-
 
 const RedirectPage = () => {
   const location = useLocation();
@@ -92,13 +86,11 @@ const RedirectPage = () => {
   }
 };
 
-
 const EventDetail = () => (
   <div className="page-container">
     <h1>Event Details</h1>
     <p>This is where the event details will be displayed.</p>
   </div>
 );
-
 
 export default App;
