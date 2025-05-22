@@ -5,7 +5,7 @@ function EventCard({ title, link, onGetTickets }) {
   return (
     <div className="event-card">
       <h3>{title}</h3>
-      <button onClick={() => onGetTickets(link)}>Get Tickets</button>
+      <button class="absol" onClick={() => onGetTickets(link)}>Get Tickets</button>
     </div>
   );
 }

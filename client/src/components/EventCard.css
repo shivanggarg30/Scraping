@@ -39,6 +39,20 @@
   font-size: 0.85rem;
   color: #777;
 }
+.event-card {
+  position: relative; /* container box */
+  height: 200px; /* or whatever height */
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.absol {
+  position: absolute;
+  bottom: 0;
+  left: 10px; /* adjust for padding */
+  right: 10px; /* stretch horizontally if needed */
+  /* width: auto or 100% depending on design */
+}
 
 .event-card .date {
   margin-right: 1rem;

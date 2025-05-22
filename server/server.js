@@ -10,7 +10,7 @@ const app = express();
 // ✅ CORS setup for Netlify frontend
 const allowedOrigins = [
   'http://localhost:5173', // Dev frontend
-  'https://scrapingevents.netlify.app' // Replace with your actual Netlify frontend URL
+  'https://scrapingevents.netlify.app/' // Replace with your actual Netlify frontend URL
 ];
 
 app.use(cors({
@@ -52,7 +52,7 @@ let cachedEvents = [];
 // Auto-refresh every 6 hours
 cron.schedule('0 */6 * * *', async () => {
   console.log('Refreshing event list...');
-  cachedEvents = await scrapeEvents();
+  //cachedEvents = await scrapeEvents();
 });
 
 // API: Get events
