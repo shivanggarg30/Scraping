@@ -2,11 +2,13 @@
 
 [build]
 base = "client"                    # Set this if your frontend is in /client
-publish = "dist"           # Vite outputs to dist by default
+publish = "client/dist"           # Vite outputs to dist by default
 command = "npm run build"         # This will run "vite build" inside /client
 
 [build.environment]
 NODE_ENV = "production"
+NODE_VERSION = "18"
+
 
 [[redirects]]
 from = "/*"
