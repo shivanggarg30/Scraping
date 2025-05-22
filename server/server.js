@@ -8,14 +8,23 @@ require('dotenv').config();
 const app = express();
 
 // ✅ CORS setup for Netlify frontend
+const allowedOrigins = [
+  'http://localhost:5173', // Dev frontend
+  'https://scrapingevents.netlify.app/' // Replace with your actual Netlify frontend URL
+];
 
-
-// Allow only Vite frontend (localhost:5173)
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST'],
   credentials: true
 }));
+
 
 
 app.use(express.json());
